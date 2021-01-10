@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Animated } from 'react-native';
 
-export const HomeContainer = styled.SafeAreaView`
+export const HomeContainer = styled(SafeAreaView)`
   flex: 1;
   align-items: center;
   background-color: #ffe524;
@@ -13,7 +14,6 @@ export const HomeHeaderContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 24px;
 `;
 
 export const HomeHeaderTitle = styled.Text`

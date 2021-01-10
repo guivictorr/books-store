@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import AppLoading from 'expo-app-loading';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import {
   useFonts,
@@ -23,10 +24,10 @@ const Main: React.FC = () => {
   }
 
   return (
-    <>
+    <SafeAreaProvider>
       <StatusBar style="light" backgroundColor="#0f0f0f" />
       <Routes />
-    </>
+    </SafeAreaProvider>
   );
 };
 

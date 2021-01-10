@@ -59,7 +59,7 @@ const Home: React.FC = () => {
         keyExtractor={item => item.title}
         numColumns={2}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingTop: HEADER_MAX_HEIGHT - 150 }}
+        contentContainerStyle={{ paddingTop: HEADER_MAX_HEIGHT - 170 }}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: true },
