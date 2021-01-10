@@ -24,7 +24,7 @@ const Main: React.FC = () => {
 
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" backgroundColor="#0f0f0f" />
       <Routes />
     </>
   );

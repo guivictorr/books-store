@@ -1,19 +1,25 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import Subject from '../../components/Subject';
+
+import {
+  HomeContainer,
+  HomeHeader,
+  HomeHeaderTitle,
+  WelcomeContainer,
+  WelcomeText,
+} from './styles';
 
 const Home: React.FC = () => (
-  <View
-    style={{
-      backgroundColor: '#010101',
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}
-  >
-    <Text style={{ color: '#fff', fontSize: 32, fontFamily: 'Ubuntu_700Bold' }}>
-      Hello World!
-    </Text>
-  </View>
+  <HomeContainer>
+    <HomeHeader>
+      <HomeHeaderTitle>The Book Basement</HomeHeaderTitle>
+    </HomeHeader>
+    <WelcomeContainer>
+      <WelcomeText>Welcome</WelcomeText>
+      <WelcomeText>Pick a subject!</WelcomeText>
+    </WelcomeContainer>
+    <Subject />
+  </HomeContainer>
 );
 
 export default Home;
