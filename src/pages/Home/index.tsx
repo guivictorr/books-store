@@ -10,7 +10,9 @@ const Home: React.FC = () => (
       justifyContent: 'center',
     }}
   >
-    <Text style={{ color: '#fff', fontSize: 32 }}>Hello World!</Text>
+    <Text style={{ color: '#fff', fontSize: 32, fontFamily: 'Ubuntu_700Bold' }}>
+      Hello World!
+    </Text>
   </View>
 );
 

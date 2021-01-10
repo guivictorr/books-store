@@ -40,5 +40,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-console': ['error', { allow: ['tron'] }],
     'import/extensions': 'off',
+    'react/style-prop-object': 'off',
+    camelcase: 'off',
   },
 };
