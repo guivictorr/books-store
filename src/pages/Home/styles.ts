@@ -1,13 +1,14 @@
 import styled from 'styled-components/native';
+import { Animated } from 'react-native';
 
-export const HomeContainer = styled.View`
+export const HomeContainer = styled.SafeAreaView`
   flex: 1;
   align-items: center;
   background-color: #ffe524;
 `;
 
-export const HomeHeader = styled.View`
-  height: 100px;
+export const HomeHeaderContainer = styled.View`
+  height: 70px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -17,13 +18,19 @@ export const HomeHeader = styled.View`
 
 export const HomeHeaderTitle = styled.Text`
   color: #0f0f0f;
-  font-size: 28px;
+  font-size: 24px;
   font-family: 'Ubuntu_500Medium';
 `;
 
-export const WelcomeContainer = styled.View`
+export const WelcomeContainer = styled(Animated.View)`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
-  height: 200px;
   padding: 20px;
 `;
 
