@@ -2,7 +2,8 @@ import styled from 'styled-components/native';
 
 export const HomeContainer = styled.View`
   flex: 1;
-  background-color: #ffe207;
+  align-items: center;
+  background-color: #ffe524;
 `;
 
 export const HomeHeader = styled.View`
@@ -21,10 +22,12 @@ export const HomeHeaderTitle = styled.Text`
 `;
 
 export const WelcomeContainer = styled.View`
+  width: 100%;
+  height: 200px;
   padding: 20px;
 `;
 
 export const WelcomeText = styled.Text`
-  font-size: 52px;
+  font-size: 56px;
   font-family: 'Ubuntu_700Bold';
 `;

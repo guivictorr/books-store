@@ -42,5 +42,6 @@ module.exports = {
     'import/extensions': 'off',
     'react/style-prop-object': 'off',
     camelcase: 'off',
+    'react/prop-types': 'off',
   },
 };
