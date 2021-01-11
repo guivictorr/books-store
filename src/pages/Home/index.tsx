@@ -1,6 +1,11 @@
 import React from 'react';
 import { Animated } from 'react-native';
 
+import subjects from '../../utils/subjects';
+import useHomeAnimations from '../../hooks/useScrollAnimations';
+
+import Subject from '../../components/Subject';
+
 import {
   HomeContainer,
   WelcomeContainer,
@@ -9,34 +14,11 @@ import {
   HomeHeaderTitle,
 } from './styles';
 
-import Subject from '../../components/Subject';
-import useHomeAnimations from './useHomeAnimations';
-
-const subjects = [
-  { title: 'Romantic' },
-  { title: 'Fairytale' },
-  { title: 'Science' },
-  { title: 'Action' },
-  { title: 'History' },
-  { title: 'Biography' },
-  { title: 'Health' },
-  { title: 'Economy' },
-  { title: 'dsadsa' },
-  { title: 'adsad' },
-  { title: 'dsadsa' },
-  { title: 'sadsad' },
-  { title: 'sadsa' },
-  { title: 'dsadas' },
-  { title: 'Econdsadasomy' },
-];
-
 const Home: React.FC = () => {
-  const {
-    HEADER_MAX_HEIGHT,
-    welcomeOpacityAnimation,
-    scrollY,
-    welcomeTranslateX,
-  } = useHomeAnimations();
+  const headerMaxHeight = 350;
+  const { scrollY, opacityAnimation, translateX } = useHomeAnimations(
+    headerMaxHeight,
+  );
 
   return (
     <HomeContainer>
@@ -45,9 +27,9 @@ const Home: React.FC = () => {
       </HomeHeaderContainer>
       <WelcomeContainer
         style={{
-          transform: [{ translateX: welcomeTranslateX }],
-          opacity: welcomeOpacityAnimation,
-          height: HEADER_MAX_HEIGHT,
+          transform: [{ translateX }],
+          opacity: opacityAnimation,
+          height: headerMaxHeight,
         }}
       >
         <WelcomeText>Welcome</WelcomeText>
@@ -59,7 +41,7 @@ const Home: React.FC = () => {
         keyExtractor={item => item.title}
         numColumns={2}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingTop: HEADER_MAX_HEIGHT - 170 }}
+        contentContainerStyle={{ paddingTop: headerMaxHeight - 170 }}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: true },
