@@ -4,7 +4,6 @@ import { Animated } from 'react-native';
 
 export const HomeContainer = styled(SafeAreaView)`
   flex: 1;
-  align-items: center;
   background-color: #ffe524;
 `;
 

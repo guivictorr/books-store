@@ -1,15 +1,21 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+
+import { SubjectProps } from '../../interfaces';
 
 import { SubjectContainer, SubjectTitle } from './styles';
 
-interface SubjectProps {
-  title: string;
-}
+const Subject: React.FC<SubjectProps> = ({ title }) => {
+  const { navigate } = useNavigation();
 
-const Subject: React.FC<SubjectProps> = ({ title }) => (
-  <SubjectContainer activeOpacity={0.9}>
-    <SubjectTitle>{title}</SubjectTitle>
-  </SubjectContainer>
-);
+  return (
+    <SubjectContainer
+      activeOpacity={0.9}
+      onPress={() => navigate('List', { subjectTitle: title })}
+    >
+      <SubjectTitle>{title}</SubjectTitle>
+    </SubjectContainer>
+  );
+};
 
 export default Subject;

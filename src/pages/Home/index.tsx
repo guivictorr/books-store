@@ -2,7 +2,7 @@ import React from 'react';
 import { Animated } from 'react-native';
 
 import subjects from '../../utils/subjects';
-import useHomeAnimations from '../../hooks/useScrollAnimations';
+import useScrollAnimations from '../../hooks/useScrollAnimations';
 
 import Subject from '../../components/Subject';
 
@@ -16,7 +16,7 @@ import {
 
 const Home: React.FC = () => {
   const headerMaxHeight = 350;
-  const { scrollY, opacityAnimation, translateX } = useHomeAnimations(
+  const { scrollY, opacityAnimation, translateX } = useScrollAnimations(
     headerMaxHeight,
   );
 
@@ -41,7 +41,10 @@ const Home: React.FC = () => {
         keyExtractor={item => item.title}
         numColumns={2}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingTop: headerMaxHeight - 170 }}
+        contentContainerStyle={{
+          paddingTop: headerMaxHeight - 170,
+          alignItems: 'center',
+        }}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: true },
