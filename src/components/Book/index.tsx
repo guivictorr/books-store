@@ -1,12 +1,15 @@
 import React from 'react';
+import { BookContainer, BookImage } from './styles';
+import { BookProps } from '../../interfaces';
 
-import { Text } from 'react-native';
-
-import { BookContainer } from './styles';
-
-const Book: React.FC = () => (
+const Book: React.FC<BookProps> = ({ imageUrl }) => (
   <BookContainer>
-    <Text>Book</Text>
+    <BookImage
+      resizeMode="cover"
+      source={{
+        uri: imageUrl,
+      }}
+    />
   </BookContainer>
 );
 

@@ -1,8 +1,8 @@
 const subjects = [
-  { title: 'Romantic' },
+  { title: 'Romance' },
   { title: 'Fairytale' },
   { title: 'Science' },
-  { title: 'Action' },
+  { title: 'Fantasy' },
   { title: 'History' },
   { title: 'Biography' },
   { title: 'Health' },
