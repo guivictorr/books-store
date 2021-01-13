@@ -12,6 +12,7 @@ export const HeaderContainer = styled.View`
 export const HeaderTitle = styled.Text`
   font-size: 26px;
   font-family: 'Ubuntu_400Regular';
+  max-width: 80%;
 `;
 
 export const HeaderInput = styled.TextInput`
