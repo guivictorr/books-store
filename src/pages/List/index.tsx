@@ -8,23 +8,25 @@ import { ListPageProps, BookDataProps } from '../../interfaces';
 import Book from '../../components/Book';
 import Header from '../../components/Header';
 
-import { ListContainer } from './styles';
+import { ListContainer, LoadMoreButton, LoadMoreText } from './styles';
 
 const List: React.FC = () => {
   const [booksData, setBooks] = useState<BookDataProps[]>();
+  const [maxResults, setMaxResults] = useState(15);
   const {
     params: { subjectTitle },
   } = useRoute<ListPageProps>();
 
   const handleGetBooks = async () => {
-    const { data } = await api.get(`${subjectTitle}&maxResults=40`);
+    if (maxResults >= 40) {
+      return;
+    }
+
+    setMaxResults(maxResults + 5);
+    const { data } = await api.get(`${subjectTitle}&maxResults=${maxResults}`);
     const books = data.items;
 
-    const filteredBooks = books.filter(
-      (book: BookDataProps) => book.saleInfo.saleability !== 'NOT_FOR_SALE',
-    );
-
-    setBooks(filteredBooks);
+    setBooks(books);
   };
 
   useEffect(() => {
@@ -36,12 +38,23 @@ const List: React.FC = () => {
       <Header title={subjectTitle} />
       <FlatList
         data={booksData}
-        renderItem={({ item }) => (
-          <Book imageUrl={item.volumeInfo.imageLinks.thumbnail} />
-        )}
         keyExtractor={item => item.id}
         numColumns={3}
         contentContainerStyle={{ alignItems: 'center' }}
+        renderItem={({ item }) => (
+          <Book
+            imageUrl={item.volumeInfo.imageLinks.thumbnail}
+            bookId={item.id}
+          />
+        )}
+        ListFooterComponent={() => (
+          <LoadMoreButton
+            maxResults={maxResults}
+            onPress={() => handleGetBooks()}
+          >
+            <LoadMoreText>Load More</LoadMoreText>
+          </LoadMoreButton>
+        )}
       />
     </ListContainer>
   );

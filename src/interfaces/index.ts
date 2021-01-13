@@ -6,6 +6,14 @@ export interface ListPageProps {
   };
 }
 
+export interface DetailsPageProps {
+  key: string;
+  name: string;
+  params: {
+    bookId: string;
+  };
+}
+
 export interface SubjectProps {
   title: string;
 }
@@ -16,6 +24,7 @@ export interface HeaderProps {
 
 export interface BookProps {
   imageUrl: string;
+  bookId: string;
 }
 
 export interface BookDataProps {
