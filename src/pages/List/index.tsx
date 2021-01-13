@@ -18,20 +18,23 @@ const List: React.FC = () => {
   } = useRoute<ListPageProps>();
 
   const handleGetBooks = async () => {
-    if (maxResults >= 40) {
-      return;
-    }
-
-    setMaxResults(maxResults + 5);
     const { data } = await api.get(`${subjectTitle}&maxResults=${maxResults}`);
     const books = data.items;
 
     setBooks(books);
   };
 
+  const handleLoadMore = () => {
+    if (maxResults >= 40) {
+      return;
+    }
+
+    setMaxResults(maxResults + 5);
+  };
+
   useEffect(() => {
     handleGetBooks();
-  }, []);
+  }, [maxResults]);
 
   return (
     <ListContainer>
@@ -48,10 +51,7 @@ const List: React.FC = () => {
           />
         )}
         ListFooterComponent={() => (
-          <LoadMoreButton
-            maxResults={maxResults}
-            onPress={() => handleGetBooks()}
-          >
+          <LoadMoreButton maxResults={maxResults} onPress={handleLoadMore}>
             <LoadMoreText>Load More</LoadMoreText>
           </LoadMoreButton>
         )}
