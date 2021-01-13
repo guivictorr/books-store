@@ -8,6 +8,7 @@ module.exports = {
     'prettier',
     'prettier/react',
     'prettier/@typescript-eslint',
+    'plugin:@typescript-eslint/recommended',
   ],
   globals: {
     Atomics: 'readonly',
@@ -29,7 +30,13 @@ module.exports = {
       },
     },
   },
-  plugins: ['react', 'prettier'],
+  plugins: [
+    'react',
+    'prettier',
+    '@typescript-eslint',
+    'react-hooks',
+    '@typescript-eslint-parser',
+  ],
   rules: {
     'prettier/prettier': ['error', { singleQuote: true }],
     'react/jsx-filename-extension': [
