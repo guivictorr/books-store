@@ -11,6 +11,7 @@ import {
 } from '@expo-google-fonts/ubuntu';
 
 import Routes from './routes';
+import AppProvider from './context';
 
 const Main: React.FC = () => {
   const [fontsLoaded] = useFonts({
@@ -26,7 +27,9 @@ const Main: React.FC = () => {
   return (
     <SafeAreaProvider>
       <StatusBar style="light" backgroundColor="#0f0f0f" />
-      <Routes />
+      <AppProvider>
+        <Routes />
+      </AppProvider>
     </SafeAreaProvider>
   );
 };
