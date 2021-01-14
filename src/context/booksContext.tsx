@@ -1,11 +1,6 @@
 import React, { createContext, useState } from 'react';
-import { BookDataProps } from '../interfaces';
+import { BookDataProps, BooksContextProps } from '../interfaces';
 import api from '../services/api';
-
-interface BooksContextProps {
-  booksData: BookDataProps[];
-  handleGetBooks(searchTerm: string): Promise<void>;
-}
 
 export const BooksContext = createContext<BooksContextProps>(
   {} as BooksContextProps,
@@ -13,6 +8,7 @@ export const BooksContext = createContext<BooksContextProps>(
 
 export const BooksProvider: React.FC = ({ children }) => {
   const [booksData, setBooksData] = useState<BookDataProps[]>([]);
+  const [loadMoreNumber, setLoadMoreNumber] = useState(20);
 
   const handleGetBooks = async (
     searchTerm: string,
@@ -28,11 +24,23 @@ export const BooksProvider: React.FC = ({ children }) => {
     setBooksData(filteredBooks);
   };
 
+  const handleLoadMore = async (searchTerm: string) => {
+    if (loadMoreNumber >= 40) {
+      return;
+    }
+    setLoadMoreNumber(loadMoreNumber + 5);
+    await handleGetBooks(searchTerm, loadMoreNumber);
+    console.log(loadMoreNumber, 'teste');
+  };
+
   return (
     <BooksContext.Provider
       value={{
         booksData,
+        loadMoreNumber,
         handleGetBooks,
+        handleLoadMore,
+        setLoadMoreNumber,
       }}
     >
       {children}

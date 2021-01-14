@@ -38,3 +38,15 @@ export interface BookDataProps {
     saleability: string;
   };
 }
+
+export interface LoadMoreButtonProps {
+  searchTerm: string;
+}
+
+export interface BooksContextProps {
+  booksData: BookDataProps[];
+  loadMoreNumber: number;
+  handleGetBooks(searchTerm: string, maxResults?: number): Promise<void>;
+  handleLoadMore(searchTerm: string): Promise<void>;
+  setLoadMoreNumber(number: number): void;
+}

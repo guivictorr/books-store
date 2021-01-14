@@ -9,18 +9,19 @@ import { HeaderContainer, HeaderTitle, HeaderInput } from './styles';
 import { BooksContext } from '../../context/booksContext';
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
-  const { handleGetBooks } = useContext(BooksContext);
+  const { handleGetBooks, setLoadMoreNumber } = useContext(BooksContext);
   const [isSearching, setIsSearching] = useState(false);
   const [inputText, setInputText] = useState(title);
-  const { goBack } = useNavigation();
+  const { goBack, setParams } = useNavigation();
 
   const handleCustomSearch = async () => {
     if (!isSearching) {
       setIsSearching(true);
       return;
     }
-
+    setLoadMoreNumber(20);
     await handleGetBooks(inputText);
+    setParams({ subjectTitle: inputText });
     setIsSearching(false);
   };
 

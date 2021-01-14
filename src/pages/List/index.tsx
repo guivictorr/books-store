@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { FlatList } from 'react-native';
 
@@ -31,7 +31,7 @@ const List: React.FC = () => {
             bookId={item.id}
           />
         )}
-        ListFooterComponent={() => <LoadMoreButton />}
+        ListFooterComponent={() => <LoadMoreButton searchTerm={subjectTitle} />}
       />
     </ListContainer>
   );

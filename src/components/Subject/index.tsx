@@ -8,9 +8,10 @@ import { BooksContext } from '../../context/booksContext';
 
 const Subject: React.FC<SubjectProps> = ({ title }) => {
   const { navigate } = useNavigation();
-  const { handleGetBooks } = useContext(BooksContext);
+  const { handleGetBooks, setLoadMoreNumber } = useContext(BooksContext);
 
   const handleGetSubjectBooks = async () => {
+    setLoadMoreNumber(20);
     await handleGetBooks(title);
     navigate('List', { subjectTitle: title });
   };
