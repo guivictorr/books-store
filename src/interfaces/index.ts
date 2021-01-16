@@ -1,11 +1,3 @@
-export interface ListPageProps {
-  key: string;
-  name: string;
-  params: {
-    subjectTitle: string;
-  };
-}
-
 export interface DetailsPageProps {
   key: string;
   name: string;
@@ -15,10 +7,6 @@ export interface DetailsPageProps {
 }
 
 export interface SubjectProps {
-  title: string;
-}
-
-export interface HeaderProps {
   title: string;
 }
 
@@ -39,14 +27,11 @@ export interface BookDataProps {
   };
 }
 
-export interface LoadMoreButtonProps {
-  searchTerm: string;
-}
-
 export interface BooksContextProps {
   booksData: BookDataProps[];
   loadMoreNumber: number;
+  currentSearch: string;
   handleGetBooks(searchTerm: string, maxResults?: number): Promise<void>;
-  handleLoadMore(searchTerm: string): Promise<void>;
+  handleLoadMore(): Promise<void>;
   setLoadMoreNumber(number: number): void;
 }

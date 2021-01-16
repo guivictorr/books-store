@@ -9,11 +9,13 @@ export const BooksContext = createContext<BooksContextProps>(
 export const BooksProvider: React.FC = ({ children }) => {
   const [booksData, setBooksData] = useState<BookDataProps[]>([]);
   const [loadMoreNumber, setLoadMoreNumber] = useState(20);
+  const [currentSearch, setCurrentSearch] = useState('');
 
   const handleGetBooks = async (
     searchTerm: string,
     maxResults: number = 15,
   ) => {
+    setCurrentSearch(searchTerm);
     const { data } = await api.get(`${searchTerm}&maxResults=${maxResults}`);
     const books = data.items;
 
@@ -24,13 +26,12 @@ export const BooksProvider: React.FC = ({ children }) => {
     setBooksData(filteredBooks);
   };
 
-  const handleLoadMore = async (searchTerm: string) => {
+  const handleLoadMore = async () => {
     if (loadMoreNumber >= 40) {
       return;
     }
     setLoadMoreNumber(loadMoreNumber + 5);
-    await handleGetBooks(searchTerm, loadMoreNumber);
-    console.log(loadMoreNumber, 'teste');
+    await handleGetBooks(currentSearch, loadMoreNumber);
   };
 
   return (
@@ -38,6 +39,7 @@ export const BooksProvider: React.FC = ({ children }) => {
       value={{
         booksData,
         loadMoreNumber,
+        currentSearch,
         handleGetBooks,
         handleLoadMore,
         setLoadMoreNumber,

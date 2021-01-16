@@ -13,7 +13,7 @@ const Subject: React.FC<SubjectProps> = ({ title }) => {
   const handleGetSubjectBooks = async () => {
     setLoadMoreNumber(20);
     await handleGetBooks(title);
-    navigate('List', { subjectTitle: title });
+    navigate('List');
   };
 
   return (

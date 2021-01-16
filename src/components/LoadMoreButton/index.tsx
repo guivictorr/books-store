@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import { BooksContext } from '../../context/booksContext';
-import { LoadMoreButtonProps } from '../../interfaces';
 import { LoadMoreButtonContainer, LoadMoreText } from './styles';
 
-const LoadMoreButton: React.FC<LoadMoreButtonProps> = ({ searchTerm }) => {
+const LoadMoreButton: React.FC = () => {
   const { handleLoadMore, loadMoreNumber } = useContext(BooksContext);
 
   if (loadMoreNumber >= 40) {
@@ -11,7 +10,7 @@ const LoadMoreButton: React.FC<LoadMoreButtonProps> = ({ searchTerm }) => {
   }
 
   return (
-    <LoadMoreButtonContainer onPress={() => handleLoadMore(searchTerm)}>
+    <LoadMoreButtonContainer onPress={handleLoadMore}>
       <LoadMoreText>Load More</LoadMoreText>
     </LoadMoreButtonContainer>
   );

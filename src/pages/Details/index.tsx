@@ -1,9 +1,9 @@
 import { useRoute } from '@react-navigation/native';
 import React from 'react';
-import { Text } from 'react-native';
+import Header from '../../components/Header';
 import { DetailsPageProps } from '../../interfaces';
 
-import { Container } from './styles';
+import { DetailsContainer } from './styles';
 
 const Details: React.FC = () => {
   const {
@@ -11,9 +11,9 @@ const Details: React.FC = () => {
   } = useRoute<DetailsPageProps>();
 
   return (
-    <Container>
-      <Text style={{ color: '#000' }}>{bookId}</Text>
-    </Container>
+    <DetailsContainer>
+      <Header />
+    </DetailsContainer>
   );
 };
 

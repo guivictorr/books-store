@@ -1,8 +1,6 @@
-import React, { useContext, useEffect } from 'react';
-import { useRoute } from '@react-navigation/native';
+import React, { useContext } from 'react';
 import { FlatList } from 'react-native';
 
-import { ListPageProps } from '../../interfaces';
 import { BooksContext } from '../../context/booksContext';
 
 import Book from '../../components/Book';
@@ -13,13 +11,10 @@ import { ListContainer } from './styles';
 
 const List: React.FC = () => {
   const { booksData } = useContext(BooksContext);
-  const {
-    params: { subjectTitle },
-  } = useRoute<ListPageProps>();
 
   return (
     <ListContainer>
-      <Header title={subjectTitle} />
+      <Header />
       <FlatList
         data={booksData}
         keyExtractor={item => item.id}
@@ -31,7 +26,7 @@ const List: React.FC = () => {
             bookId={item.id}
           />
         )}
-        ListFooterComponent={() => <LoadMoreButton searchTerm={subjectTitle} />}
+        ListFooterComponent={() => <LoadMoreButton />}
       />
     </ListContainer>
   );
