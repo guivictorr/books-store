@@ -1,8 +1,10 @@
 import { Feather } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
-import React from 'react';
+import AppLoading from 'expo-app-loading';
+import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
-import { DetailsPageProps } from '../../interfaces';
+import { BookDataProps, DetailsPageProps } from '../../interfaces';
+import api from '../../services/api';
 
 import {
   DetailsContainer,
@@ -25,34 +27,58 @@ import {
 } from './styles';
 
 const Details: React.FC = () => {
+  const [bookData, setBookData] = useState<BookDataProps>();
+
   const {
     params: { bookId },
   } = useRoute<DetailsPageProps>();
+
+  const handleBookData = async () => {
+    const { data } = await api.get(
+      `https://www.googleapis.com/books/v1/volumes/${bookId}`,
+    );
+    setBookData(data);
+  };
+
+  useEffect(() => {
+    handleBookData();
+  }, []);
+
+  if (!bookData) {
+    return <AppLoading />;
+  }
+
+  const {
+    title,
+    pageCount,
+    description,
+    imageLinks: { thumbnail },
+    authors,
+    averageRating,
+  } = bookData.volumeInfo;
+
+  const { listPrice, saleability } = bookData.saleInfo;
 
   return (
     <DetailsContainer>
       <Header />
       <DetailsMainContent>
         <BookMainDetails>
-          <BookImage
-            resizeMode="cover"
-            source={{
-              uri:
-                'http://books.google.com/books/content?id=OP8C9mKQxAMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-            }}
-          />
+          <BookImage resizeMode="cover" source={{ uri: thumbnail }} />
           <BookDetails>
-            <BookTitle>
-              Logo Design Love: A Guide to Creating Iconic Brand Identities
-            </BookTitle>
-            <BookAuthor>by David Airey</BookAuthor>
+            <BookTitle>{title}</BookTitle>
+            <BookAuthor>by {authors.toString()}</BookAuthor>
             <BookDetailsFooter>
-              <BookPrice>$9.99</BookPrice>
+              <BookPrice>
+                {saleability !== 'NOT_FOR_SALE'
+                  ? `$${listPrice.amount}`
+                  : 'Not for sale'}
+              </BookPrice>
             </BookDetailsFooter>
           </BookDetails>
         </BookMainDetails>
         <DetailsMainContentFooter>
-          <BookPages>216 pages</BookPages>
+          <BookPages>{pageCount} pages</BookPages>
           <BookDetailsButtons>
             <BookBuyButton>
               <BookBuyButtonText>BUY</BookBuyButtonText>
@@ -65,24 +91,7 @@ const Details: React.FC = () => {
       </DetailsMainContent>
 
       <DetailsDescription>
-        <BookDescription>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur odit
-          ut tempora dolores totam dolorum accusamus nulla porro id? Tenetur
-          porro molestias velit quod repellendus iusto qui quis molestiae
-          blanditiis. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Tenetur odit ut tempora dolores totam dolorum accusamus nulla porro
-          id? Tenetur porro molestias velit quod repellendus iusto qui quis
-          molestiae blanditiis. Lorem ipsum dolor, sit amet consectetur
-          adipisicing elit. Tenetur odit ut tempora dolores totam dolorum
-          accusamus nulla porro id? Tenetur porro molestias velit quod
-          repellendus iusto qui quis molestiae blanditiis. Lorem ipsum dolor,
-          sit amet consectetur adipisicing elit. Tenetur odit ut tempora dolores
-          totam dolorum accusamus nulla porro id? Tenetur porro molestias velit
-          quod repellendus iusto qui quis molestiae blanditiis. Lorem ipsum
-          dolor, sit amet consectetur adipisicing elit. Tenetur odit ut tempora
-          dolores totam dolorum accusamus nulla porro id? Tenetur porro
-          molestias velit quod repellendus iusto qui quis molestiae blanditiis.
-        </BookDescription>
+        <BookDescription>{description}</BookDescription>
       </DetailsDescription>
     </DetailsContainer>
   );

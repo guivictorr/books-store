@@ -18,12 +18,21 @@ export interface BookProps {
 export interface BookDataProps {
   id: string;
   volumeInfo: {
+    title: string;
+    description: string;
+    authors: string[];
+    pageCount: number;
+    averageRating: number;
     imageLinks: {
       thumbnail: string;
     };
   };
   saleInfo: {
     saleability: string;
+    listPrice: {
+      amount: number;
+      currencyCode: string;
+    };
   };
 }
 
