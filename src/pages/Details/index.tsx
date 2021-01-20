@@ -59,6 +59,15 @@ const Details: React.FC = () => {
 
   const { listPrice, saleability } = bookData.saleInfo;
 
+  type Currency = {
+    [key: string]: string;
+  };
+
+  const currencySymbols: Currency = {
+    BRL: 'R$',
+    USD: 'USD$',
+  };
+
   return (
     <DetailsContainer>
       <Header />
@@ -67,11 +76,15 @@ const Details: React.FC = () => {
           <BookImage resizeMode="cover" source={{ uri: thumbnail }} />
           <BookDetails>
             <BookTitle>{title}</BookTitle>
-            <BookAuthor>by {authors.toString()}</BookAuthor>
+            <BookAuthor>
+              by {authors ? authors.toString() : 'Unknown'}
+            </BookAuthor>
             <BookDetailsFooter>
               <BookPrice>
                 {saleability !== 'NOT_FOR_SALE'
-                  ? `$${listPrice.amount}`
+                  ? `${
+                      currencySymbols[listPrice.currencyCode]
+                    }${listPrice.amount.toFixed(2)}`
                   : 'Not for sale'}
               </BookPrice>
             </BookDetailsFooter>
@@ -91,7 +104,9 @@ const Details: React.FC = () => {
       </DetailsMainContent>
 
       <DetailsDescription>
-        <BookDescription>{description}</BookDescription>
+        <BookDescription>
+          {description ? description.replace(/<[^>]*>/g, '') : 'No Description'}
+        </BookDescription>
       </DetailsDescription>
     </DetailsContainer>
   );

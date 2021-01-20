@@ -8,7 +8,7 @@ export const DetailsContainer = styled(SafeAreaView)`
 `;
 
 export const DetailsMainContent = styled.View`
-  height: 250px;
+  height: auto;
   width: 100%;
   padding: 20px 15px;
 `;
@@ -39,6 +39,7 @@ export const BookAuthor = styled.Text`
   opacity: 0.7;
   font-size: 15px;
   font-family: 'Ubuntu_400Regular';
+  width: 250px;
 `;
 
 export const BookPrice = styled.Text`
