@@ -1,6 +1,9 @@
 <h1 align='center'>📚 The Books Basement</h1>
 <p align='center'>The Books Basement é um ecommerce de livros construído utilizando dados do <a href="https://developers.google.com/books/docs/v1/using">Google Books</a> e React Native para a interface.</p>
 
+## 💄 Layout
+- [Layout no Figma](https://www.figma.com/file/m0dlsDr4LqBriwCBNiLmCM/Books-Store?node-id=0%3A1)
+
 ## 🛠 Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
