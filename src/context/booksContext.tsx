@@ -8,8 +8,18 @@ export const BooksContext = createContext<BooksContextProps>(
 
 export const BooksProvider: React.FC = ({ children }) => {
   const [booksData, setBooksData] = useState<BookDataProps[]>([]);
+  const [favoriteBooks, setFavoriteBooks] = useState<string[]>([]);
   const [loadMoreNumber, setLoadMoreNumber] = useState(20);
   const [currentSearch, setCurrentSearch] = useState('');
+
+  const handleFavoriteBooks = (bookId: string) => {
+    if (!favoriteBooks.includes(bookId)) {
+      setFavoriteBooks([...favoriteBooks, bookId]);
+    } else {
+      const bookIndex = favoriteBooks.findIndex(item => item === bookId);
+      favoriteBooks.splice(bookIndex, 1);
+    }
+  };
 
   const handleGetBooks = async (
     searchTerm: string,
@@ -40,8 +50,10 @@ export const BooksProvider: React.FC = ({ children }) => {
         booksData,
         loadMoreNumber,
         currentSearch,
+        favoriteBooks,
         handleGetBooks,
         handleLoadMore,
+        handleFavoriteBooks,
         setLoadMoreNumber,
       }}
     >

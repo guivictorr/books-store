@@ -1,8 +1,9 @@
 import { Feather } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../../components/Header';
+import { BooksContext } from '../../context/booksContext';
 import { BookDataProps, DetailsPageProps } from '../../interfaces';
 import api from '../../services/api';
 
@@ -28,10 +29,11 @@ import {
 
 const Details: React.FC = () => {
   const [bookData, setBookData] = useState<BookDataProps>();
-
+  const { handleFavoriteBooks, favoriteBooks } = useContext(BooksContext);
   const {
     params: { bookId },
   } = useRoute<DetailsPageProps>();
+  const [isFavorite, setIsFavorite] = useState(favoriteBooks.includes(bookId));
 
   const handleBookData = async () => {
     const { data } = await api.get(
@@ -67,6 +69,7 @@ const Details: React.FC = () => {
     BRL: 'R$',
     USD: 'USD$',
   };
+  console.log(favoriteBooks);
 
   return (
     <DetailsContainer>
@@ -96,8 +99,17 @@ const Details: React.FC = () => {
             <BookBuyButton>
               <BookBuyButtonText>BUY</BookBuyButtonText>
             </BookBuyButton>
-            <BookFavoriteButton>
-              <Feather name="heart" color="#f5f5f5" size={16} />
+            <BookFavoriteButton
+              onPress={() => {
+                handleFavoriteBooks(bookId);
+                setIsFavorite(!isFavorite);
+              }}
+            >
+              <Feather
+                name={isFavorite ? 'slash' : 'heart'}
+                color="#f5f5f5"
+                size={16}
+              />
             </BookFavoriteButton>
           </BookDetailsButtons>
         </DetailsMainContentFooter>

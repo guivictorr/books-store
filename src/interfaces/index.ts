@@ -40,7 +40,9 @@ export interface BooksContextProps {
   booksData: BookDataProps[];
   loadMoreNumber: number;
   currentSearch: string;
+  favoriteBooks: string[];
   handleGetBooks(searchTerm: string, maxResults?: number): Promise<void>;
   handleLoadMore(): Promise<void>;
   setLoadMoreNumber(number: number): void;
+  handleFavoriteBooks(bookId: string): void;
 }
