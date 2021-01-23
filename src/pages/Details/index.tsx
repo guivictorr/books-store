@@ -69,7 +69,6 @@ const Details: React.FC = () => {
     BRL: 'R$',
     USD: 'USD$',
   };
-  console.log(favoriteBooks);
 
   return (
     <DetailsContainer>
