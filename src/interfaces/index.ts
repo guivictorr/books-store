@@ -1,3 +1,7 @@
+export interface FavoriteButtonProps {
+  isFavorite: boolean;
+}
+
 export interface DetailsPageProps {
   key: string;
   name: string;

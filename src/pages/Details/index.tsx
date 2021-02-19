@@ -1,39 +1,50 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import AppLoading from 'expo-app-loading';
 import { ScrollView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
 
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { BookDataProps, DetailsPageProps } from '../../interfaces';
-import { BooksContext } from '../../context/booksContext';
 import api from '../../services/api';
 
+import FavoriteButton from '../../components/FavoriteButton';
 import Header from '../../components/Header';
 
 import {
-  DetailsContainer,
-  DetailsMainContent,
-  DetailsDescription,
-  BookImage,
   BookDetails,
+  BookDetailsContent,
+  BookDescriptionContainer,
+  BookImage,
+  BookCover,
   BookTitle,
   BookAuthor,
   BookPrice,
-  BookDetailsFooter,
-  DetailsMainContentFooter,
   BookPages,
   BookBuyButton,
   BookBuyButtonText,
-  BookFavoriteButton,
-  BookMainDetails,
-  BookDetailsButtons,
+  BookButtons,
   BookDescription,
 } from './styles';
 
 const Details: React.FC = () => {
-  const [bookData, setBookData] = useState<BookDataProps>({} as BookDataProps);
-  const { handleFavoriteBooks, handleIsFavorite } = useContext(BooksContext);
+  const [bookData, setBookData] = useState<BookDataProps>();
   const { params } = useRoute<DetailsPageProps>();
-  const [isFavorite, setIsFavorite] = useState(handleIsFavorite(params.bookId));
+
+  const handleBookData = async () => {
+    const { data } = await api.get(
+      `https://www.googleapis.com/books/v1/volumes/${params.bookId}`,
+    );
+    setBookData(data);
+  };
+
+  useEffect(() => {
+    handleBookData();
+  }, []);
+
+  if (!bookData) {
+    return <AppLoading />;
+  }
+
   const {
     saleInfo: { listPrice },
     volumeInfo: {
@@ -45,65 +56,41 @@ const Details: React.FC = () => {
     },
   } = bookData;
 
-  const handleBookData = async () => {
-    const { data } = await api.get(
-      `https://www.googleapis.com/books/v1/volumes/${params.bookId}`,
-    );
-    setBookData(data);
-  };
-
-  const handleAddFavoriteBook = () => {
-    handleFavoriteBooks(params.bookId);
-    setIsFavorite(!isFavorite);
-  };
-
-  useEffect(() => {
-    handleBookData();
-  }, []);
-
   return (
-    <ScrollView>
-      <DetailsContainer>
+    <SafeAreaView>
+      <ScrollView>
         <Header />
-        <DetailsMainContent>
-          <BookMainDetails>
+        <BookDetails>
+          <BookCover>
             <BookImage resizeMode="cover" source={{ uri: thumbnail }} />
-            <BookDetails>
-              <BookTitle>{title}</BookTitle>
-              <BookAuthor>
-                by {authors ? authors.toString() : 'Unknown'}
-              </BookAuthor>
-              <BookDetailsFooter>
-                <BookPrice>{listPrice.amount}</BookPrice>
-              </BookDetailsFooter>
-            </BookDetails>
-          </BookMainDetails>
-          <DetailsMainContentFooter>
             <BookPages>{pageCount} pages</BookPages>
-            <BookDetailsButtons>
+          </BookCover>
+          <BookDetailsContent>
+            <BookTitle numberOfLines={3}>{title}</BookTitle>
+            <BookAuthor>
+              by {authors ? authors.toString() : 'Unknown'}
+            </BookAuthor>
+            <BookPrice>
+              {listPrice ? `R$${listPrice.amount}` : 'Not for sale'}
+            </BookPrice>
+            <BookButtons>
               <BookBuyButton>
                 <BookBuyButtonText>BUY</BookBuyButtonText>
               </BookBuyButton>
-              <BookFavoriteButton onPress={handleAddFavoriteBook}>
-                <Feather
-                  name={isFavorite ? 'slash' : 'heart'}
-                  color="#f5f5f5"
-                  size={16}
-                />
-              </BookFavoriteButton>
-            </BookDetailsButtons>
-          </DetailsMainContentFooter>
-        </DetailsMainContent>
+              <FavoriteButton bookId={params.bookId} />
+            </BookButtons>
+          </BookDetailsContent>
+        </BookDetails>
 
-        <DetailsDescription>
+        <BookDescriptionContainer>
           <BookDescription>
             {description
               ? description.replace(/<[^>]*>/g, '')
               : 'No Description'}
           </BookDescription>
-        </DetailsDescription>
-      </DetailsContainer>
-    </ScrollView>
+        </BookDescriptionContainer>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
