@@ -71,7 +71,7 @@ const Details: React.FC = () => {
               by {authors ? authors.toString() : 'Unknown'}
             </BookAuthor>
             <BookPrice>
-              {listPrice ? `R$${listPrice.amount}` : 'Not for sale'}
+              {listPrice ? `R$${listPrice.amount.toFixed(2)}` : 'Not for sale'}
             </BookPrice>
             <BookButtons>
               <BookBuyButton>
