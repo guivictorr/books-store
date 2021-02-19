@@ -21,10 +21,7 @@ export const BooksProvider: React.FC = ({ children }) => {
     }
   };
 
-  const handleGetBooks = async (
-    searchTerm: string,
-    maxResults: number = 15,
-  ) => {
+  const handleGetBooks = async (searchTerm: string, maxResults = 15) => {
     setCurrentSearch(searchTerm);
     const { data } = await api.get(`${searchTerm}&maxResults=${maxResults}`);
     const books = data.items;
@@ -44,17 +41,17 @@ export const BooksProvider: React.FC = ({ children }) => {
     await handleGetBooks(currentSearch, loadMoreNumber);
   };
 
+  const handleIsFavorite = (bookId: string) => favoriteBooks.includes(bookId);
+
   return (
     <BooksContext.Provider
       value={{
         booksData,
-        loadMoreNumber,
         currentSearch,
-        favoriteBooks,
+        handleIsFavorite,
         handleGetBooks,
         handleLoadMore,
         handleFavoriteBooks,
-        setLoadMoreNumber,
       }}
     >
       {children}

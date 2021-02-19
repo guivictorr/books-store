@@ -9,13 +9,12 @@ const MainStackNavigation: React.FC = () => {
   const { Screen, Navigator } = createStackNavigator();
 
   return (
-    <Navigator>
-      <Screen name="Home" component={Home} options={{ headerShown: false }} />
-      <Screen name="List" component={List} options={{ headerShown: false }} />
+    <Navigator headerMode="none">
+      <Screen name="Home" component={Home} />
+      <Screen name="List" component={List} />
       <Screen
         name="Details"
         component={Details}
-        options={{ headerShown: false }}
       />
     </Navigator>
   );

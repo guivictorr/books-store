@@ -15,7 +15,7 @@ module.exports = {
     SharedArrayBuffer: 'readonly',
     __DEV__: 'readonly',
   },
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -30,13 +30,7 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    'react',
-    'prettier',
-    '@typescript-eslint',
-    'react-hooks',
-    '@typescript-eslint-parser',
-  ],
+  plugins: ['react', 'prettier', '@typescript-eslint', 'react-hooks'],
   rules: {
     'prettier/prettier': ['error', { singleQuote: true }],
     'react/jsx-filename-extension': [
@@ -50,5 +44,7 @@ module.exports = {
     'react/style-prop-object': 'off',
     camelcase: 'off',
     'react/prop-types': 'off',
+    'no-use-before-define': [0],
+    '@typescript-eslint/no-use-before-define': [1],
   },
 };

@@ -7,6 +7,7 @@ export const HeaderContainer = styled.View`
   flex-direction: row;
   height: 70px;
   padding: 0 20px;
+  background: #ffe524;
 `;
 
 export const HeaderTitle = styled.Text`

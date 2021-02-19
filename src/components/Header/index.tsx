@@ -8,9 +8,7 @@ import { HeaderContainer, HeaderTitle, HeaderInput } from './styles';
 import { BooksContext } from '../../context/booksContext';
 
 const Header: React.FC = () => {
-  const { handleGetBooks, setLoadMoreNumber, currentSearch } = useContext(
-    BooksContext,
-  );
+  const { handleGetBooks, currentSearch } = useContext(BooksContext);
   const [isSearching, setIsSearching] = useState(false);
   const [inputText, setInputText] = useState('');
   const { goBack, navigate } = useNavigation();
@@ -26,11 +24,10 @@ const Header: React.FC = () => {
       return;
     }
 
-    setLoadMoreNumber(20);
     await handleGetBooks(inputText);
     setInputText('');
-    navigate('List');
     setIsSearching(false);
+    navigate('List');
   };
 
   return (

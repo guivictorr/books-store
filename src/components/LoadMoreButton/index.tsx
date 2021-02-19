@@ -3,11 +3,7 @@ import { BooksContext } from '../../context/booksContext';
 import { LoadMoreButtonContainer, LoadMoreText } from './styles';
 
 const LoadMoreButton: React.FC = () => {
-  const { handleLoadMore, loadMoreNumber } = useContext(BooksContext);
-
-  if (loadMoreNumber >= 40) {
-    return <></>;
-  }
+  const { handleLoadMore } = useContext(BooksContext);
 
   return (
     <LoadMoreButtonContainer onPress={handleLoadMore}>
