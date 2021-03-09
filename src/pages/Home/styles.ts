@@ -22,11 +22,8 @@ export const HomeHeaderTitle = styled.Text`
 `;
 
 export const WelcomeContainer = styled(Animated.View)`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
   position: absolute;
-  top: 0;
+  top: 70px;
   left: 0;
   right: 0;
   width: 100%;

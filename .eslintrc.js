@@ -32,7 +32,7 @@ module.exports = {
   },
   plugins: ['react', 'prettier', '@typescript-eslint', 'react-hooks'],
   rules: {
-    'prettier/prettier': ['error', { singleQuote: true }],
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'react/jsx-filename-extension': [
       'warn',
       { extensions: ['.tsx', '.ts', '.jsx', '.js'] },

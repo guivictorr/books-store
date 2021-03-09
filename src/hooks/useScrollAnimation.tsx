@@ -1,7 +1,13 @@
 import { useRef } from 'react';
 import { Animated } from 'react-native';
 
-const useHomeAnimations = (scrollDistance: number) => {
+interface IUseScrollAnimation {
+  translateX: Animated.AnimatedInterpolation;
+  opacityAnimation: Animated.AnimatedInterpolation;
+  scrollY: Animated.Value;
+}
+
+const useScrollAnimation = (scrollDistance: number): IUseScrollAnimation => {
   const scrollY = useRef(new Animated.Value(0)).current;
 
   const translateX = scrollY.interpolate({
@@ -22,4 +28,4 @@ const useHomeAnimations = (scrollDistance: number) => {
   };
 };
 
-export default useHomeAnimations;
+export default useScrollAnimation;

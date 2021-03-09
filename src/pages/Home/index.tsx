@@ -1,8 +1,8 @@
-import React from 'react';
-import { Animated } from 'react-native';
+import React, { useState } from 'react';
+import { Animated, LayoutChangeEvent } from 'react-native';
 
 import subjects from '../../utils/subjects';
-import useScrollAnimations from '../../hooks/useScrollAnimations';
+import useScrollAnimation from '../../hooks/useScrollAnimation';
 
 import Subject from '../../components/Subject';
 
@@ -15,10 +15,25 @@ import {
 } from './styles';
 
 const Home: React.FC = () => {
-  const headerMaxHeight = 350;
-  const { scrollY, opacityAnimation, translateX } = useScrollAnimations(
+  const [headerMaxHeight, setHeaderMaxHeight] = useState(200);
+  const { scrollY, opacityAnimation, translateX } = useScrollAnimation(
     headerMaxHeight,
   );
+
+  const flatListStyles = {
+    paddingTop: headerMaxHeight - 20,
+    paddingHorizontal: 15,
+  };
+
+  const welcomeContainerStyles = {
+    transform: [{ translateX }],
+    opacity: opacityAnimation,
+  };
+
+  const handleWelcomeContainerHeight = (event: LayoutChangeEvent) => {
+    const { height } = event.nativeEvent.layout;
+    setHeaderMaxHeight(height);
+  };
 
   return (
     <HomeContainer>
@@ -26,11 +41,8 @@ const Home: React.FC = () => {
         <HomeHeaderTitle>The Books Basement</HomeHeaderTitle>
       </HomeHeaderContainer>
       <WelcomeContainer
-        style={{
-          transform: [{ translateX }],
-          opacity: opacityAnimation,
-          height: headerMaxHeight,
-        }}
+        onLayout={handleWelcomeContainerHeight}
+        style={welcomeContainerStyles}
       >
         <WelcomeText>Welcome</WelcomeText>
         <WelcomeText>Pick a subject!</WelcomeText>
@@ -39,12 +51,8 @@ const Home: React.FC = () => {
         data={subjects}
         renderItem={({ item }) => <Subject title={item.title} />}
         keyExtractor={item => item.title}
-        numColumns={2}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingTop: headerMaxHeight - 170,
-          alignItems: 'center',
-        }}
+        contentContainerStyle={flatListStyles}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: true },
