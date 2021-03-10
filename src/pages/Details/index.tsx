@@ -66,7 +66,7 @@ const Details: React.FC = () => {
             <BookPages>{pageCount} pages</BookPages>
           </BookCover>
           <BookDetailsContent>
-            <BookTitle numberOfLines={3}>{title}</BookTitle>
+            <BookTitle numberOfLines={2}>{title}</BookTitle>
             <BookAuthor>
               by {authors ? authors.toString() : 'Unknown'}
             </BookAuthor>

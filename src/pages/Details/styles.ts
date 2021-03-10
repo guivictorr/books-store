@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export const BookDetails = styled.View`
+export const BookDetails = styled(SafeAreaView)`
   flex-direction: row;
   justify-content: space-between;
   padding: 20px 15px;
@@ -10,7 +11,8 @@ export const BookDetails = styled.View`
 
 export const BookDetailsContent = styled.View`
   justify-content: space-between;
-  max-width: 250px;
+  flex: 1;
+  margin-left: 20px;
 `;
 
 export const BookCover = styled.View`
@@ -26,7 +28,6 @@ export const BookImage = styled.Image`
 export const BookTitle = styled.Text`
   font-family: 'Ubuntu_700Bold';
   font-size: 22px;
-  width: 250px;
   color: #0f0f0f;
 `;
 
@@ -35,7 +36,6 @@ export const BookAuthor = styled.Text`
   opacity: 0.7;
   font-size: 15px;
   font-family: 'Ubuntu_400Regular';
-  width: 250px;
 `;
 
 export const BookPrice = styled.Text`
@@ -69,7 +69,7 @@ export const BookPages = styled.Text`
 export const BookButtons = styled.View`
   flex-direction: row;
   align-self: flex-end;
-  margin-top: 10px;
+  margin: 10px 15px 0 0;
 `;
 
 export const BookBuyButton = styled(RectButton)`
