@@ -4,7 +4,7 @@ import { RectButton } from 'react-native-gesture-handler';
 export const BookContainer = styled(RectButton)`
   width: 110px;
   height: 150px;
-  margin: 10px 7px;
+  margin: 5px;
 `;
 
 export const BookImage = styled.Image`
