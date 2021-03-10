@@ -21,7 +21,7 @@ const Home: React.FC = () => {
   );
 
   const flatListStyles = {
-    paddingTop: headerMaxHeight - 20,
+    paddingTop: headerMaxHeight,
     paddingHorizontal: 15,
   };
 

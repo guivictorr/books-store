@@ -1,8 +1,7 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
-export const BookDetails = styled(SafeAreaView)`
+export const BookDetails = styled.View`
   flex-direction: row;
   justify-content: space-between;
   padding: 20px 15px;

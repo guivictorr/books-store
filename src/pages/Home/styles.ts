@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import Constants from 'expo-constants';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Animated } from 'react-native';
 
@@ -23,7 +24,7 @@ export const HomeHeaderTitle = styled.Text`
 
 export const WelcomeContainer = styled(Animated.View)`
   position: absolute;
-  top: 70px;
+  top: ${Constants.statusBarHeight + 70}px;
   left: 0;
   right: 0;
   width: 100%;
@@ -33,4 +34,5 @@ export const WelcomeContainer = styled(Animated.View)`
 export const WelcomeText = styled.Text`
   font-size: 56px;
   font-family: 'Ubuntu_700Bold';
+  color: #0f0f0f;
 `;
