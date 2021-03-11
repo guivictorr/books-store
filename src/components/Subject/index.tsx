@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import { SubjectProps } from '../../interfaces';
+import { SubjectProps } from '../../types';
 
 import { SubjectContainer, SubjectTitle } from './styles';
 
-const Subject: React.FC<SubjectProps> = ({ title }) => {
+const Subject = ({ title }: SubjectProps): ReactElement => {
   const { navigate } = useNavigation();
 
   const handleGetSubjectBooks = async () => {

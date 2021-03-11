@@ -1,6 +1,17 @@
-export interface FavoriteButtonProps {
+import { ReactNode } from 'react';
+import { Animated } from 'react-native';
+
+export type LayoutProps = {
+  children: ReactNode;
+};
+
+export type FavoriteButtonProps = {
+  bookId: string;
+};
+
+export type FavoriteStylesProps = {
   isFavorite: boolean;
-}
+};
 
 export type IParams = {
   List: {
@@ -11,16 +22,16 @@ export type IParams = {
   };
 };
 
-export interface SubjectProps {
+export type SubjectProps = {
   title: string;
-}
+};
 
-export interface BookProps {
+export type BookProps = {
   imageUrl: string;
   bookId: string;
-}
+};
 
-export interface BookDataProps {
+export type BookDataProps = {
   id: string;
   volumeInfo: {
     title: string;
@@ -39,14 +50,20 @@ export interface BookDataProps {
       currencyCode: string;
     };
   };
-}
+};
 
-export interface BooksContextProps {
+export type IUseScrollAnimation = {
+  translateX: Animated.AnimatedInterpolation;
+  opacityAnimation: Animated.AnimatedInterpolation;
+  scrollY: Animated.Value;
+};
+
+export type BooksContextProps = {
   booksData: BookDataProps[];
   handleGetBooks(searchTerm: string, maxResults?: number): Promise<void>;
-}
+};
 
-export interface FavoriteBooksContext {
+export type FavoriteBooksContext = {
   handleFavoriteBooks(bookId: string): void;
   handleIsFavorite(bookId: string): boolean;
-}
+};

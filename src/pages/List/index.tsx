@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { ReactElement, useContext, useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 
 import { useRoute, RouteProp } from '@react-navigation/native';
@@ -9,9 +9,9 @@ import Header from '../../components/Header';
 import LoadMoreButton from '../../components/LoadMoreButton';
 
 import { ListContainer } from './styles';
-import { IParams } from '../../interfaces';
+import { IParams } from '../../types';
 
-const List: React.FC = () => {
+const List = (): ReactElement => {
   const [maxResults, setMaxResults] = useState(15);
   const { params } = useRoute<RouteProp<IParams, 'List'>>();
   const { booksData, handleGetBooks } = useContext(BooksContext);

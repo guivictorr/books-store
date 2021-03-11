@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { ReactElement, useContext, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 
 import { FavoriteButtonContainer } from './styles';
 import { FavoriteContext } from '../../context/favoriteBooksContext';
+import { FavoriteButtonProps } from '../../types';
 
-const FavoriteButton: React.FC<{ bookId: string }> = ({ bookId }) => {
+const FavoriteButton = ({ bookId }: FavoriteButtonProps): ReactElement => {
   const { handleFavoriteBooks, handleIsFavorite } = useContext(FavoriteContext);
 
   const [isFavorite, setIsFavorite] = useState(handleIsFavorite(bookId));

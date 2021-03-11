@@ -1,11 +1,11 @@
-import React, { createContext, useState } from 'react';
-import { FavoriteBooksContext } from '../interfaces';
+import React, { createContext, ReactElement, useState } from 'react';
+import { FavoriteBooksContext, LayoutProps } from '../types';
 
 export const FavoriteContext = createContext<FavoriteBooksContext>(
   {} as FavoriteBooksContext,
 );
 
-export const FavoriteProvider: React.FC = ({ children }) => {
+export const FavoriteProvider = ({ children }: LayoutProps): ReactElement => {
   const [favoriteBooks, setFavoriteBooks] = useState<string[]>([]);
 
   const handleFavoriteBooks = (bookId: string) => {

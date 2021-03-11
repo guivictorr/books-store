@@ -1,12 +1,12 @@
-import React, { createContext, useState } from 'react';
-import { BookDataProps, BooksContextProps } from '../interfaces';
+import React, { createContext, ReactElement, useState } from 'react';
+import { BookDataProps, BooksContextProps, LayoutProps } from '../types';
 import api from '../services/api';
 
 export const BooksContext = createContext<BooksContextProps>(
   {} as BooksContextProps,
 );
 
-export const BooksProvider: React.FC = ({ children }) => {
+export const BooksProvider = ({ children }: LayoutProps): ReactElement => {
   const [booksData, setBooksData] = useState<BookDataProps[]>([]);
 
   const handleGetBooks = async (searchTerm: string, maxResults = 15) => {

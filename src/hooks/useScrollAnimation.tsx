@@ -1,11 +1,6 @@
 import { useRef } from 'react';
 import { Animated } from 'react-native';
-
-interface IUseScrollAnimation {
-  translateX: Animated.AnimatedInterpolation;
-  opacityAnimation: Animated.AnimatedInterpolation;
-  scrollY: Animated.Value;
-}
+import { IUseScrollAnimation } from '../types';
 
 const useScrollAnimation = (scrollDistance: number): IUseScrollAnimation => {
   const scrollY = useRef(new Animated.Value(0)).current;

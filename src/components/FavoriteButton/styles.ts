@@ -1,9 +1,9 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
-import { FavoriteButtonProps } from '../../interfaces';
+import { FavoriteStylesProps } from '../../types';
 
-export const FavoriteButtonContainer = styled(RectButton)<FavoriteButtonProps>`
+export const FavoriteButtonContainer = styled(RectButton)<FavoriteStylesProps>`
   background-color: ${({ isFavorite }) => (isFavorite ? 'grey' : '#ff3f4a')};
   border-radius: 50px;
   padding: 5px;

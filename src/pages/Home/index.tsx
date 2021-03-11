@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Animated, LayoutChangeEvent } from 'react-native';
 
 import subjects from '../../utils/subjects';
@@ -14,7 +14,7 @@ import {
   HomeHeaderTitle,
 } from './styles';
 
-const Home: React.FC = () => {
+const Home = (): ReactElement => {
   const [headerMaxHeight, setHeaderMaxHeight] = useState(200);
   const { scrollY, opacityAnimation, translateX } = useScrollAnimation(
     headerMaxHeight,

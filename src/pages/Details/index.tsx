@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import { ScrollView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { BookDataProps, IParams } from '../../interfaces';
+import { BookDataProps, IParams } from '../../types';
 import api from '../../services/api';
 
 import FavoriteButton from '../../components/FavoriteButton';
@@ -26,7 +26,7 @@ import {
   BookDescription,
 } from './styles';
 
-const Details: React.FC = () => {
+const Details = (): ReactElement => {
   const [bookData, setBookData] = useState<BookDataProps>();
   const { params } = useRoute<RouteProp<IParams, 'Details'>>();
 

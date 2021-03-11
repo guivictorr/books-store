@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { ReactElement, useContext, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
@@ -6,9 +6,9 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
 import { HeaderContainer, HeaderTitle, HeaderInput } from './styles';
 import { BooksContext } from '../../context/booksContext';
-import { IParams } from '../../interfaces';
+import { IParams } from '../../types';
 
-const Header: React.FC = () => {
+const Header = (): ReactElement => {
   const { handleGetBooks } = useContext(BooksContext);
   const { params } = useRoute<RouteProp<IParams, 'List'>>();
   const [isSearching, setIsSearching] = useState(false);

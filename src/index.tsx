@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import AppLoading from 'expo-app-loading';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -13,7 +13,7 @@ import {
 import Routes from './routes';
 import AppProvider from './context';
 
-const Main: React.FC = () => {
+const Main = (): ReactElement => {
   const [fontsLoaded] = useFonts({
     Ubuntu_400Regular,
     Ubuntu_500Medium,

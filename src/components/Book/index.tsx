@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { BookContainer, BookImage } from './styles';
-import { BookProps } from '../../interfaces';
+import { BookProps } from '../../types';
 
-const Book: React.FC<BookProps> = ({ imageUrl, bookId }) => {
+const Book = ({ imageUrl, bookId }: BookProps): ReactElement => {
   const { navigate } = useNavigation();
   return (
     <BookContainer onPress={() => navigate('Details', { bookId })}>
@@ -16,4 +16,5 @@ const Book: React.FC<BookProps> = ({ imageUrl, bookId }) => {
     </BookContainer>
   );
 };
+
 export default Book;
