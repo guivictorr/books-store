@@ -2,13 +2,15 @@ import React, { useContext, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
 import { HeaderContainer, HeaderTitle, HeaderInput } from './styles';
 import { BooksContext } from '../../context/booksContext';
+import { IParams } from '../../interfaces';
 
 const Header: React.FC = () => {
-  const { handleGetBooks, currentSearch } = useContext(BooksContext);
+  const { handleGetBooks } = useContext(BooksContext);
+  const { params } = useRoute<RouteProp<IParams, 'List'>>();
   const [isSearching, setIsSearching] = useState(false);
   const [inputText, setInputText] = useState('');
   const { goBack, navigate } = useNavigation();
@@ -25,9 +27,8 @@ const Header: React.FC = () => {
     }
 
     await handleGetBooks(inputText);
-    setInputText('');
     setIsSearching(false);
-    navigate('List');
+    navigate('List', { searchTerm: inputText });
   };
 
   return (
@@ -41,7 +42,7 @@ const Header: React.FC = () => {
           onChangeText={text => setInputText(text)}
         />
       ) : (
-        <HeaderTitle numberOfLines={1}>{currentSearch}</HeaderTitle>
+        <HeaderTitle numberOfLines={1}>{params.searchTerm}</HeaderTitle>
       )}
       <BorderlessButton onPress={handleCustomSearch}>
         <Feather

@@ -1,18 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { SubjectProps } from '../../interfaces';
 
 import { SubjectContainer, SubjectTitle } from './styles';
-import { BooksContext } from '../../context/booksContext';
 
 const Subject: React.FC<SubjectProps> = ({ title }) => {
   const { navigate } = useNavigation();
-  const { handleGetBooks } = useContext(BooksContext);
 
   const handleGetSubjectBooks = async () => {
-    await handleGetBooks(title);
-    navigate('List');
+    navigate('List', { searchTerm: title });
   };
 
   return (

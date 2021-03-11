@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 
+import { useRoute, RouteProp } from '@react-navigation/native';
 import { BooksContext } from '../../context/booksContext';
 
 import Book from '../../components/Book';
@@ -8,9 +9,27 @@ import Header from '../../components/Header';
 import LoadMoreButton from '../../components/LoadMoreButton';
 
 import { ListContainer } from './styles';
+import { IParams } from '../../interfaces';
 
 const List: React.FC = () => {
-  const { booksData } = useContext(BooksContext);
+  const [maxResults, setMaxResults] = useState(15);
+  const { params } = useRoute<RouteProp<IParams, 'List'>>();
+  const { booksData, handleGetBooks } = useContext(BooksContext);
+
+  const handleLoadMore = () => {
+    setMaxResults(prevState => prevState + 5);
+  };
+
+  const renderLoadMoreButton = () => {
+    if (maxResults >= 40) {
+      return <></>;
+    }
+    return <LoadMoreButton onPress={handleLoadMore} />;
+  };
+
+  useEffect(() => {
+    handleGetBooks(params.searchTerm, maxResults);
+  }, [maxResults]);
 
   return (
     <ListContainer>
@@ -26,7 +45,7 @@ const List: React.FC = () => {
             bookId={item.id}
           />
         )}
-        ListFooterComponent={() => <LoadMoreButton />}
+        ListFooterComponent={renderLoadMoreButton}
       />
     </ListContainer>
   );

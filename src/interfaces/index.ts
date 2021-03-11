@@ -2,13 +2,14 @@ export interface FavoriteButtonProps {
   isFavorite: boolean;
 }
 
-export interface DetailsPageProps {
-  key: string;
-  name: string;
-  params: {
+export type IParams = {
+  List: {
+    searchTerm: string;
+  };
+  Details: {
     bookId: string;
   };
-}
+};
 
 export interface SubjectProps {
   title: string;
@@ -42,9 +43,10 @@ export interface BookDataProps {
 
 export interface BooksContextProps {
   booksData: BookDataProps[];
-  currentSearch: string;
   handleGetBooks(searchTerm: string, maxResults?: number): Promise<void>;
-  handleLoadMore(): Promise<void>;
+}
+
+export interface FavoriteBooksContext {
   handleFavoriteBooks(bookId: string): void;
   handleIsFavorite(bookId: string): boolean;
 }

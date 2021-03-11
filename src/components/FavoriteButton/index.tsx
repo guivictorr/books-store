@@ -1,12 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 
-import { BooksContext } from '../../context/booksContext';
-
 import { FavoriteButtonContainer } from './styles';
+import { FavoriteContext } from '../../context/favoriteBooksContext';
 
 const FavoriteButton: React.FC<{ bookId: string }> = ({ bookId }) => {
-  const { handleFavoriteBooks, handleIsFavorite } = useContext(BooksContext);
+  const { handleFavoriteBooks, handleIsFavorite } = useContext(FavoriteContext);
 
   const [isFavorite, setIsFavorite] = useState(handleIsFavorite(bookId));
 
